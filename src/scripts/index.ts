@@ -11,38 +11,45 @@ window.$ = $;
 const $textField = $('.wordlist');
 const $inputField = $('#keyboard-input');
 
-let time: number;
 let timer: number;
+let startTime: number;
 let wordList: string[];
+let currentWord: number;
+let isTimerActive: boolean;
+const correctWords: string[] = [];
 
-let currentWord = 0;
-let isTimerActive = false;
-const typingMode = 'timer';
+currentWord = 0;
+isTimerActive = false;
+const testMode = $('input.test-mode:checked').val() as 'timer' | 'wordCount';
 
 function getWordList() {
-  const post = Math.floor(Math.random() * (251 - 0 + 1)) + 1;
-  fetch(`https://dummyjson.com/posts/${post}`)
+  const quote = Math.floor(Math.random() * (30 - 0 + 1)) + 1;
+  fetch(`https://dummyjson.com/quotes/${quote}`)
     .then((response) => response.json())
     .then((data) => {
-      $textField.text(data.body);
-      wordList = data.body.split(' ');
+      $textField.text(data.quote);
+      wordList = data.quote.split(' ');
     });
 }
 
-function startTimer(seconds: number) {
-  time = seconds;
-  timer = window.setInterval(() => {
-    time--;
-    if (seconds === 0) {
-      clearInterval(timer);
+function startTimer() {
+  switch (testMode) {
+    case 'timer':
+      // Start a timer of specified time
+      return 0;
+    case 'wordCount': {
+      startTime = 0;
+      const timerId = window.setInterval(() => {
+        startTime++;
+      }, 1000);
+      return timerId;
     }
-    console.log(time);
-  }, 1000);
+  }
 }
 
 $inputField.on('keydown', (e) => {
   if (currentWord === 0 && !isTimerActive && /^[a-zA-Z]$/.test(e.key)) {
-    startTimer(60);
+    timer = startTimer();
     isTimerActive = true;
   }
   if (e.key === ' ') {
@@ -51,13 +58,19 @@ $inputField.on('keydown', (e) => {
     if ($inputField.val() !== '') {
       if (currentWord < wordList.length - 1) {
         const inputWord = $inputField.val();
-        if (inputWord === wordList[currentWord]) {
-          console.log(inputWord);
+        if (inputWord && inputWord === wordList[currentWord]) {
+          correctWords.push(inputWord);
         }
-        $inputField.val('');
         currentWord++;
+      } else {
+        window.clearInterval(timer);
+        console.log(startTime);
+        console.log(correctWords);
+        $inputField.prop('disabled', true);
       }
     }
+
+    $inputField.val('');
   }
 });
 
