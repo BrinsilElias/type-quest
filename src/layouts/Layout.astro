@@ -42,5 +42,14 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
+    <script>
+      import $ from 'jquery';
+      declare global {
+        interface Window {
+          $: typeof $;
+        }
+      }
+      window.$ = $;
+    </script>
   </body>
 </html>
