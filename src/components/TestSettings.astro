@@ -7,13 +7,8 @@ interface Config {
 }
 
 const modeConfig: Config[] = [
-  { id: 'timer-mode', label: 'Timer Mode', value: 'timer' },
-  {
-    id: 'word-count-mode',
-    label: 'Word Count Mode',
-    value: 'wordCount',
-    checked: true,
-  },
+  { id: 'timer-mode', label: 'Timer Mode', value: 'timer', checked: true },
+  { id: 'word-count-mode', label: 'Word Count Mode', value: 'wordCount' },
 ];
 
 const timerConfig: Config[] = [
@@ -68,7 +63,7 @@ const textConfig: Config[] = [
               id={id}
               value={value}
               checked={checked}
-              name="timer"
+              name="timer-countdown"
             />
           </li>
         ))
