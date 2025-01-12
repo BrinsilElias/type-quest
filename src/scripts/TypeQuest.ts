@@ -10,6 +10,7 @@ class TypeQuest {
   private matchedWords: string[];
   private isTimerActive: boolean;
   private currentWordIndex: number;
+  private currentLetterIndex: number;
   private generatedWords: string[];
 
   constructor(
@@ -31,6 +32,7 @@ class TypeQuest {
     this.matchedWords = [];
     this.generatedWords = [];
     this.currentWordIndex = 0;
+    this.currentLetterIndex = 0;
     this.isTimerActive = false;
 
     this.startTimer = this.startTimer.bind(this);
@@ -77,6 +79,9 @@ class TypeQuest {
         }
         throw new Error('Failed to fetch word list from network');
       }
+      if (this.typingMode === 'timer') {
+        this.wordCount = 600;
+      }
       while (this.generatedWords.length < this.wordCount) {
         const randomIndex = Math.floor(Math.random() * randomWords.length);
         const randomWord = randomWords[randomIndex] || '';
@@ -121,8 +126,18 @@ class TypeQuest {
       ) {
         this.startTimer();
       }
+      if (event.key !== ' ' && event.key !== 'Backspace') {
+        const typedKey = event.key;
+        const currentWord = this.generatedWords[this.currentWordIndex] || '';
+        const currentLetter = currentWord[this.currentLetterIndex];
+        if (typedKey === currentLetter) {
+          // Move caret and add green highlight
+        }
+        this.currentLetterIndex++;
+      }
       if (event.key === ' ') {
         event.preventDefault();
+        this.currentLetterIndex = 0;
         if ($inputField.val() !== '') {
           const typedWord = $inputField.val() || '';
           switch (this.typingMode) {
