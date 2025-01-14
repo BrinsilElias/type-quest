@@ -11,11 +11,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/sitemap": "^3.2.1",
     "astro": "^5.1.5",
     "jquery": "^3.7.1"
   },
   "devDependencies": {
-    "@types/jquery": "^3.5.32"
+    "@types/jquery": "^3.5.32",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
