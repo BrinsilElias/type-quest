@@ -2,17 +2,8 @@
 
 /* TL;DR: Utility classes (yes, like Tailwind) */
 
-.flow > * + *,
-.prose > * + * {
+.flow > * + * {
   margin-block-start: var(--flow-space, var(--space-s-m));
-}
-
-.prose :is(pre, pre + *, figure, figure + *, h2, h3, h4, h5, h6) {
-  --flow-space: var(--space-l-xl);
-}
-
-.prose :is(h2 + *, h3 + *, h4 + *, h5 + *, h6 + *) {
-  --flow-space: var(--space-s);
 }
 
 .wrapper {
@@ -44,10 +35,6 @@
   padding-bottom: var(--region-space, var(--space-l-xl));
 }
 
-.prose {
-  max-inline-size: var(--content-measure);
-}
-
 .object-fit-cover {
   height: 100%;
   object-fit: cover;
@@ -68,8 +55,13 @@
   white-space: nowrap !important;
 }
 
+.text-center {
+  text-align: center;
+  margin-inline: auto;
+}
+
 /* === FOR DEBUGGING PURPOSES ONLY! === */
-/*
+/* 
 * {
-  background: rgb(0 100 0 / 0.05) !important;
+  border: solid 1px rgba(1, 181, 1, 0.318) !important;
 } */
