@@ -1,19 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import InputField from '../components/InputField.astro';
 import TestSettings from '../components/TestSettings.astro';
 ---
 
+<style>
+  
+
+  .wordlist {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-5);
+  }
+</style>
+
 <Layout title="TypeQuest">
   <main>
-    <article class="region prose wrapper">
+    <h1 class="text-center">Type Quest</h1>
+    <section class="region flow wrapper">
       <TestSettings />
-      <p class="wordlist"></p>
-      <input
-        id="keyboard-input"
-        type="text"
-        placeholder="Start typing"
-        autocomplete="off"
-      />
-    </article>
+      <section class="wordlist">
+        still now then as again tell person feel with man little around own
+        stand some hold child leave into few you all look not with find good
+        interest to word even play come place own call with
+      </section>
+      <InputField />
+    </section>
+    <footer></footer>
   </main>
 </Layout>

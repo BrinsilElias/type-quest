@@ -80,13 +80,13 @@ class TypeQuest {
         throw new Error('Failed to fetch word list from network');
       }
       if (this.typingMode === 'timer') {
-        this.wordCount = 600;
+        this.wordCount = 300;
       }
       while (this.generatedWords.length < this.wordCount) {
         const randomIndex = Math.floor(Math.random() * randomWords.length);
         const randomWord = randomWords[randomIndex] || '';
         this.generatedWords.push(randomWord);
-        $container.append(`<span>${randomWord} </span>`);
+        // $container.append(`<span>${randomWord} </span>`);
       }
     } catch (error) {
       console.error(error);

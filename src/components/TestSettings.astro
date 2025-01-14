@@ -1,105 +1,80 @@
 ---
-interface Config {
-  id: string;
-  label: string;
-  value: string;
-  checked?: boolean;
-}
+import Controls from './Controls.astro';
 
-const modeConfig: Config[] = [
+const textConfig = [
+  { id: 'punctuation', label: 'Punctuation', value: 'punctuation' },
+  { id: 'numbers', label: 'Numbers', value: 'numbers' },
+];
+
+const modeConfig = [
   { id: 'timer-mode', label: 'Timer Mode', value: 'timer', checked: true },
   { id: 'word-count-mode', label: 'Word Count Mode', value: 'wordCount' },
 ];
 
-const timerConfig: Config[] = [
+const timerConfig = [
   { id: 'timer-15', label: '15', value: '15', checked: true },
   { id: 'timer-30', label: '30', value: '30' },
   { id: 'timer-60', label: '60', value: '60' },
   { id: 'timer-120', label: '120', value: '120' },
 ];
 
-const wordCountConfig: Config[] = [
+const wordCountConfig = [
   { id: 'word-count-10', label: '10', value: '10', checked: true },
   { id: 'word-count-25', label: '25', value: '25' },
   { id: 'word-count-50', label: '50', value: '50' },
   { id: 'word-count-100', label: '100', value: '100' },
 ];
-
-const textConfig: Config[] = [
-  { id: 'punctuation', label: 'Punctuation', value: 'punctuation' },
-  { id: 'numbers', label: 'Numbers', value: 'numbers' },
-];
 ---
 
-<form>
-  <fieldset>
-    <legend>Test Mode</legend>
-    <ul>
-      {
-        modeConfig.map(({ id, label, value, checked }) => (
-          <li>
-            <label for={id}>{label}</label>
-            <input
-              type="radio"
-              id={id}
-              value={value}
-              checked={checked}
-              name="typing-mode"
-            />
-          </li>
-        ))
-      }
-    </ul>
+<style>
+  form {
+    display: flex;
+    gap: var(--space-m);
+    align-items: center;
+    justify-items: start;
+    margin-inline: auto;
+    width: max-content;
+    padding: var(--space-xs);
+    background-color: var(--clr-neutral-100);
+    border: 1px solid var(--clr-border-light);
+    border-radius: var(--border-radius);
+    box-shadow:
+      0px 12px 16px -4px rgba(16, 24, 40, 0.08),
+      0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+  }
+
+  fieldset:not(:nth-child(3)) {
+    padding-right: 20px;
+    border-right: 3px solid var(--clr-border-dark);
+  }
+</style>
+
+<form action="#">
+  <fieldset class="text-config">
+    <legend class="sr-only">Punctuation and Numbers</legend>
+    <Controls config={textConfig} type="checkbox" />
   </fieldset>
-  <fieldset>
-    <legend>Timer</legend>
-    <ul>
-      {
-        timerConfig.map(({ id, label, value, checked }) => (
-          <li>
-            <label for={id}>{label}</label>
-            <input
-              type="radio"
-              id={id}
-              value={value}
-              checked={checked}
-              name="timer-countdown"
-            />
-          </li>
-        ))
-      }
-    </ul>
+  <fieldset class="mode-config">
+    <legend class="sr-only">Typing Mode</legend>
+    <Controls config={modeConfig} name="typing-mode" type="radio" />
   </fieldset>
-  <fieldset>
-    <legend>Word Count</legend>
-    <ul>
-      {
-        wordCountConfig.map(({ id, label, value, checked }) => (
-          <li>
-            <label for={id}>{label}</label>
-            <input
-              type="radio"
-              id={id}
-              value={value}
-              checked={checked}
-              name="word-count"
-            />
-          </li>
-        ))
-      }
-    </ul>
+  <fieldset class="timer-config">
+    <legend class="sr-only">Timer</legend>
+    <Controls config={timerConfig} name="timer-countdown" type="radio" />
   </fieldset>
-  <fieldset>
-    <legend>Punctuation and Numbers</legend>
-    <ul>
-      {
-        textConfig.map(({ id, label, value }) => (
-          <li>
-            <label for={id}>{label}</label>
-            <input type="checkbox" id={id} value={value} />
-          </li>
-        ))
-      }
-    </ul>
+  <fieldset class="word-count-config">
+    <legend class="sr-only">Word Count</legend>
+    <Controls config={wordCountConfig} name="word-count" type="radio" />
   </fieldset>
 </form>
+
+<script>
+  const typingMode = $('input[name="typing-mode"]:checked').val() as
+    | 'timer'
+    | 'wordCount';
+  if (typingMode === 'timer') {
+    $('fieldset.word-count-config').hide();
+  } else {
+    $('fieldset.timer-config').hide();
+  }
+</script>
