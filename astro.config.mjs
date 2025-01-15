@@ -5,4 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://astro-cube.vercel.app/',
   integrations: [sitemap()],
+  experimental: {
+    svg: true,
+  },
 });

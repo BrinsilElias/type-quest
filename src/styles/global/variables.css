@@ -1,12 +1,13 @@
 :root {
   /* Colors */
-  --clr-base-light: hsl(210, 40%, 98%);
+  --clr-base-light: hsl(205, 25%, 91%);
   --clr-base-dark: hsl(217, 33%, 17%);
   --clr-accent-light: hsl(243, 75%, 59%);
   --clr-gray-light: hsl(214, 32%, 91%);
   --clr-gray-dark: hsla(215, 9%, 75%, 0.5);
 
   --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-neutral-600: hsl(220, 8%, 64%);
 
   /* Fonts */
   --font-family-primary: 'Inter', sans-serif;
@@ -32,8 +33,9 @@
 
   --outline-offset: 0.25rem;
   --outline-size: 2px;
-  --border-radius: 8px;
+  --border-radius-md: 8px;
   --border-radius-sm: 0.25rem;
+  --border-radius-lg: 0.875rem;
   --gutter: var(--space-s-m);
 
   --duration-sm: 250ms;

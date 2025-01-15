@@ -25,16 +25,13 @@ const { config, name, type } = Astro.props;
     padding: 0;
     margin: 0;
   }
-
   .form-control {
     font-weight: var(--font-weight-6);
     cursor: pointer;
-
     &:has(input[type='radio']:checked, input[type='checkbox']:checked) {
       color: var(--accent-color);
     }
   }
-
   input[type='radio'],
   input[type='checkbox'] {
     -webkit-appearance: none;
@@ -43,7 +40,6 @@ const { config, name, type } = Astro.props;
     margin: 0;
     width: 0;
     height: 0;
-
     &:checked {
       outline: none;
       border: none;

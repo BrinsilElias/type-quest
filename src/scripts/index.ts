@@ -1,7 +1,7 @@
 import TypeQuest from './TypeQuest';
 
 const $typingInput = $('#keyboard-input');
-const $wordListContainer = $('.wordlist');
+const $textFieldContainer = $('.text-field');
 
 const language = 'english';
 const includeNumbers = $('#numbers').is(':checked');
@@ -22,7 +22,7 @@ function init() {
     typingMode
   );
 
-  tq.startGame($typingInput, $wordListContainer);
+  tq.startGame($typingInput, $textFieldContainer);
 }
 
 init();

@@ -19,7 +19,7 @@ class TypeQuest {
     timerDuration: number,
     includeNumbers: boolean,
     includePunctuation: boolean,
-    typingMode: 'timer' | 'wordCount'
+    typingMode: 'timer' | 'wordCount',
   ) {
     this.language = language;
     this.wordCount = wordCount;
@@ -61,7 +61,7 @@ class TypeQuest {
 
   async fetchWordList($container: JQuery<HTMLElement>) {
     try {
-      let randomWords;
+      let randomWords: string[];
       const request = new Request('/random.json');
       const cacheName = 'word-list-cache';
       const cache = await caches.open(cacheName);
@@ -86,7 +86,11 @@ class TypeQuest {
         const randomIndex = Math.floor(Math.random() * randomWords.length);
         const randomWord = randomWords[randomIndex] || '';
         this.generatedWords.push(randomWord);
-        // $container.append(`<span>${randomWord} </span>`);
+        const wordSpan = $('<span class="word"></span>');
+        [...randomWord].forEach((letter) => {
+          wordSpan.append(`<span class="letter">${letter}</span>`);
+        });
+        $container.append(wordSpan).append(' ');
       }
     } catch (error) {
       console.error(error);
@@ -106,7 +110,7 @@ class TypeQuest {
         break;
     }
     const accuracy = Math.floor(
-      (totalWordsTyped / this.generatedWords.length) * 100
+      (totalWordsTyped / this.generatedWords.length) * 100,
     );
     const wordsPerMinute = Math.floor(totalWordsTyped / minutesElapsed);
     console.log(`WPM: ${wordsPerMinute}`);
@@ -115,7 +119,7 @@ class TypeQuest {
 
   startGame(
     $inputField: JQuery<HTMLElement>,
-    $wordListContainer: JQuery<HTMLElement>
+    $wordListContainer: JQuery<HTMLElement>,
   ) {
     this.fetchWordList($wordListContainer);
     $inputField.on('keydown', (event) => {
