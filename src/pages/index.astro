@@ -1,31 +1,73 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Shortcuts from '../components/Shortcuts.astro';
 import InputField from '../components/InputField.astro';
 import TestSettings from '../components/TestSettings.astro';
+
+import Github from '../assets/github.svg';
+import Palette from '../assets/palette.svg';
+import Version from '../assets/version.svg';
 ---
 
 <style>
-  
-
-  .wordlist {
+  h1 {
+    margin-top: var(--space-m);
+  }
+  .timer {
     font-family: var(--font-family-secondary);
-    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-6);
+    font-size: var(--font-size-md);
+    color: var(--accent-color);
+  }
+  .text-field {
+    font-family: var(--font-family-secondary);
     font-weight: var(--font-weight-5);
+    font-size: var(--font-size-lg);
+    height: 3lh;
+    overflow: hidden;
+  }
+  footer {
+    margin-top: auto;
+    .cluster {
+      margin-bottom: var(--space-xs);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      a {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3xs);
+        color: var(--clr-neutral-600);
+        font-weight: var(--font-weight-5);
+        text-decoration: none;
+      }
+    }
   }
 </style>
 
 <Layout title="TypeQuest">
-  <main>
+  <header>
     <h1 class="text-center">Type Quest</h1>
-    <section class="region flow wrapper">
+  </header>
+  <main>
+    <section class="region flow wrapper" style="--_region-space: 2rem;">
       <TestSettings />
-      <section class="wordlist">
-        still now then as again tell person feel with man little around own
-        stand some hold child leave into few you all look not with find good
-        interest to word even play come place own call with
-      </section>
+      <p class="timer | word-count">00:15</p>
+      <section class="text-field"></section>
       <InputField />
     </section>
-    <footer></footer>
   </main>
+  <footer>
+    <div class="cluster" style="--_justify-content: center; --_gutter: 1rem">
+      <Shortcuts key="⌘ + T" label="Change Theme" />
+      <Shortcuts key="⌘ + R" label="Restart Test" />
+    </div>
+    <ul class="cluster" style="--_justify-content: center; --_gutter: 2rem">
+      <li><a href=""><Github />Github</a></li>
+      <li><a href=""><Palette />Light Theme</a></li>
+      <li><a href=""><Version />v0.0.1</a></li>
+    </ul>
+  </footer>
 </Layout>

@@ -1,0 +1,39 @@
+---
+interface Props {
+  key: string;
+  label: string;
+}
+
+const { key, label } = Astro.props;
+---
+
+<style>
+  kbd {
+    --_clr-key-background: var(--clr-accent-light);
+    --_clr-key-text: var(--clr-neutral-100);
+
+    color: var(--_clr-key-text);
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-weight: var(--font-weight-4);
+    font-family: var(--font-family-primary);
+    padding: var(--space-3xs) var(--space-2xs);
+    background: linear-gradient(
+        133.67deg,
+        rgba(255, 255, 255, 0.2) 14.33%,
+        rgba(255, 255, 255, 0) 33.02%
+      ),
+      linear-gradient(0deg, #4f46e5, #4f46e5), #ffffff;
+    box-shadow:
+      2px 3px 4px rgba(81, 56, 238, 0.05),
+      0px 0px 0px 1.5px rgba(81, 56, 238, 0.2);
+  }
+  p {
+    font-weight: var(--font-weight-6);
+  }
+</style>
+
+<div class="cluster" style="--_justify-content: center; --_gutter: 1rem">
+  <kbd>{key}</kbd>
+  <p>{label}</p>
+</div>

@@ -25,7 +25,6 @@ h1 {
   font-weight: var(--font-weight-6);
 }
 
-
 h1 {
   line-height: var(--line-height-tight);
   letter-spacing: var(--tracking-l);
@@ -79,10 +78,10 @@ main:focus {
   outline-color: var(--fg-color);
 }
 
-main>ul[role='list'],
+main > ul[role='list'],
 header,
 section,
-article>*,
+article > *,
 aside {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -91,11 +90,12 @@ aside {
 main,
 header,
 aside {
-  margin-block-end: var(--space-xl-2xl);
+  margin-block-end: var(--space-l-xl);
 }
 
 footer {
-  margin-block-start: var(--space-xl-2xl);
+  margin-block-start: var(--space-l-xl);
+  padding: var(--space-xs-s);
 }
 
 fieldset {

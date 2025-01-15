@@ -3,7 +3,8 @@
 /* TL;DR: Utility classes (yes, like Tailwind) */
 
 .flow > * + * {
-  margin-block-start: var(--flow-space, var(--space-s-m));
+  --_flow-space: var(--space-s-m);
+  margin-block-start: var(--_flow-space);
 }
 
 .wrapper {
@@ -13,26 +14,23 @@
   position: relative;
 }
 
-.repel {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--gutter, var(--space-s-m));
-}
-
 .cluster {
+  --_gutter: var(--space-s-m);
+  --_justify-content: flex-start;
+
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: var(--_justify-content);
   align-items: center;
-  gap: var(--gutter, var(--space-s-m));
+  gap: var(--_gutter);
 }
 
 .region {
-  padding-top: var(--region-space, var(--space-l-xl));
-  padding-bottom: var(--region-space, var(--space-l-xl));
+  --_region-space: var(--space-l-xl);
+
+  padding-top: var(--_region-space);
+  padding-bottom: var(--_region-space);
 }
 
 .object-fit-cover {
@@ -61,7 +59,7 @@
 }
 
 /* === FOR DEBUGGING PURPOSES ONLY! === */
-/* 
+/*
 * {
   border: solid 1px rgba(1, 181, 1, 0.318) !important;
 } */
