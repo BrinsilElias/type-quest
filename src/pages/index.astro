@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+
 import Layout from '../layouts/Layout.astro';
 import Shortcuts from '../components/Shortcuts.astro';
 import InputField from '../components/InputField.astro';
@@ -7,6 +9,9 @@ import TestSettings from '../components/TestSettings.astro';
 import Github from '../assets/github.svg';
 import Palette from '../assets/palette.svg';
 import Version from '../assets/version.svg';
+
+const packageJson = fs.readFileSync('package.json', 'utf8');
+const { version } = JSON.parse(packageJson);
 ---
 
 <style>
@@ -20,14 +25,28 @@ import Version from '../assets/version.svg';
     color: var(--accent-color);
   }
   .text-field {
+    position: relative;
+    color: var(--fg-color-light);
     font-family: var(--font-family-secondary);
     font-weight: var(--font-weight-5);
     font-size: var(--font-size-lg);
     height: 3lh;
     overflow: hidden;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0.1em;
+      height: 2rem;
+      top: 8px;
+      background-color: var(--accent-color);
+      animation: caretFlashSmooth 1s infinite;
+    }
   }
   footer {
     margin-top: auto;
+    font-size: var(--font-size-xsm);
     .cluster {
       margin-bottom: var(--space-xs);
     }
@@ -65,9 +84,12 @@ import Version from '../assets/version.svg';
       <Shortcuts key="⌘ + R" label="Restart Test" />
     </div>
     <ul class="cluster" style="--_justify-content: center; --_gutter: 2rem">
-      <li><a href=""><Github />Github</a></li>
-      <li><a href=""><Palette />Light Theme</a></li>
-      <li><a href=""><Version />v0.0.1</a></li>
+      <li>
+        <a href="https://github.com/BrinsilElias/type-quest"
+          ><Github />Github</a>
+      </li>
+      <li><a href="#"><Palette />Light Theme</a></li>
+      <li><a href="#"><Version />v{version}</a></li>
     </ul>
   </footer>
 </Layout>

@@ -8,9 +8,11 @@
 }
 
 .wrapper {
+  --_gutter: 1rem;
+
   width: clamp(16rem, 95vw, 75rem);
   margin-inline: auto;
-  padding-inline: var(--gutter, 1rem);
+  padding-inline: var(--_gutter);
   position: relative;
 }
 

@@ -1,29 +1,10 @@
 ---
+import Clock from '../assets/clock.svg';
+import AtIcon from '../assets/at-icon.svg';
+import HashIcon from '../assets/hash-icon.svg';
+import WordCount from '../assets/letter-text.svg';
+
 import Setting from './Setting.astro';
-
-const textConfig = [
-  { id: 'punctuation', label: 'Punctuation', value: 'punctuation' },
-  { id: 'numbers', label: 'Numbers', value: 'numbers' },
-];
-
-const modeConfig = [
-  { id: 'timer-mode', label: 'Timer Mode', value: 'timer', checked: true },
-  { id: 'word-count-mode', label: 'Word Count Mode', value: 'wordCount' },
-];
-
-const timerConfig = [
-  { id: 'timer-15', label: '15', value: '15', checked: true },
-  { id: 'timer-30', label: '30', value: '30' },
-  { id: 'timer-60', label: '60', value: '60' },
-  { id: 'timer-120', label: '120', value: '120' },
-];
-
-const wordCountConfig = [
-  { id: 'word-count-10', label: '10', value: '10', checked: true },
-  { id: 'word-count-25', label: '25', value: '25' },
-  { id: 'word-count-50', label: '50', value: '50' },
-  { id: 'word-count-100', label: '100', value: '100' },
-];
 ---
 
 <style>
@@ -46,24 +27,81 @@ const wordCountConfig = [
     padding-right: var(--space-m);
     border-right: 3px solid var(--clr-border-dark);
   }
+  menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-s);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 </style>
 
 <form action="#">
   <fieldset class="text-config">
     <legend class="sr-only">Punctuation and Numbers</legend>
-    <Setting config={textConfig} type="checkbox" />
+    <menu>
+      <Setting id="punctuation" value="punctuation" type="checkbox">
+        <AtIcon />
+        Punctuation
+      </Setting>
+      <Setting id="numbers" value="numbers" type="checkbox">
+        <HashIcon />
+        Numbers
+      </Setting>
+    </menu>
   </fieldset>
   <fieldset class="mode-config">
     <legend class="sr-only">Typing Mode</legend>
-    <Setting config={modeConfig} name="typing-mode" type="radio" />
+    <menu>
+      <Setting
+        id="timer-mode"
+        value="timer"
+        type="radio"
+        name="typing-mode"
+        checked><Clock />Timer Mode</Setting
+      >
+      <Setting
+        id="word-count-mode"
+        value="wordCount"
+        type="radio"
+        name="typing-mode"><WordCount />Word Count Mode</Setting
+      >
+    </menu>
   </fieldset>
   <fieldset class="timer-config">
     <legend class="sr-only">Timer</legend>
-    <Setting config={timerConfig} name="timer-countdown" type="radio" />
+    <menu>
+      <Setting id="timer-15" value="15" type="radio" name="timer" checked
+        >15</Setting
+      >
+      <Setting id="timer-30" value="30" type="radio" name="timer">30</Setting>
+      <Setting id="timer-60" value="60" type="radio" name="timer">60</Setting>
+      <Setting id="timer-120" value="120" type="radio" name="timer">120</Setting
+      >
+    </menu>
   </fieldset>
   <fieldset class="word-count-config">
     <legend class="sr-only">Word Count</legend>
-    <Setting config={wordCountConfig} name="word-count" type="radio" />
+    <menu>
+      <Setting
+        id="word-count-10"
+        value="10"
+        type="radio"
+        name="word-count"
+        checked>10</Setting
+      >
+      <Setting id="word-count-25" value="25" type="radio" name="word-count"
+        >25</Setting
+      >
+      <Setting id="word-count-50" value="50" type="radio" name="word-count"
+        >50</Setting
+      >
+      <Setting id="word-count-100" value="100" type="radio" name="word-count"
+        >100</Setting
+      >
+    </menu>
   </fieldset>
 </form>
 

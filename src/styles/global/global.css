@@ -2,7 +2,7 @@ body {
   --bg-color: var(--clr-base-light);
   --fg-color: var(--clr-base-dark);
   --accent-color: var(--clr-accent-light);
-  --fg-color-light: var(--clr-gray-light);
+  --fg-color-light: var(--clr-neutral-800);
 
   --clr-border-dark: var(--clr-gray-dark);
   --clr-border-light: var(--clr-gray-light);

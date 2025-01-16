@@ -37,3 +37,10 @@ const { key, label } = Astro.props;
   <kbd>{key}</kbd>
   <p>{label}</p>
 </div>
+
+<script>
+  const userAgent = window.navigator.userAgent;
+  const isMac = userAgent.includes('Mac');
+  const key = isMac ? '⌘ + T' : 'Ctrl + T';
+  $('kbd').text(key);
+</script>

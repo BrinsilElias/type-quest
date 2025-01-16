@@ -139,6 +139,11 @@ class TypeQuest {
         }
         this.currentLetterIndex++;
       }
+      if (event.key === 'Backspace') {
+        if (this.currentLetterIndex > 0) {
+          this.currentLetterIndex--;
+        }
+      }
       if (event.key === ' ') {
         event.preventDefault();
         this.currentLetterIndex = 0;
