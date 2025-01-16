@@ -23,7 +23,13 @@ import Refresh from '../assets/refresh-cw.svg';
   }
   input {
     border: none;
-    padding: var(--space-2xs);
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-5);
+    color: var(--clr-accent-light);
   }
   button {
     --_clr-button-background: var(--clr-accent-light);
@@ -48,7 +54,7 @@ import Refresh from '../assets/refresh-cw.svg';
   }
 </style>
 
-<div class="input-field-wrapper" style=" --_flow-space: var(--space-l-xl);">
+<div class="input-field-wrapper" style="--_flow-space: var(--space-l-xl);">
   <input type="text" id="keyboard-input" autocomplete="off" />
   <button type="button">Redo<Refresh /></button>
 </div>

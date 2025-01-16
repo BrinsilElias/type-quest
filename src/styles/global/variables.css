@@ -8,11 +8,13 @@
 
   --clr-neutral-100: hsl(0, 0%, 100%);
   --clr-neutral-600: hsl(220, 8%, 64%);
+  --clr-neutral-800: hsl(219, 11%, 48%);
 
   /* Fonts */
   --font-family-primary: 'Inter', sans-serif;
   --font-family-secondary: 'Plus Jakarta Sans', serif;
 
+  --font-size-xsm: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-md: 1.375rem;
   --font-size-lg: 2rem;
@@ -36,7 +38,6 @@
   --border-radius-md: 8px;
   --border-radius-sm: 0.25rem;
   --border-radius-lg: 0.875rem;
-  --gutter: var(--space-s-m);
 
   --duration-sm: 250ms;
   --duration-md: 500ms;
