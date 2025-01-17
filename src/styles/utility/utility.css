@@ -3,14 +3,14 @@
 /* TL;DR: Utility classes (yes, like Tailwind) */
 
 .flow > * + * {
-  --_flow-space: var(--space-s-m);
+  --_flow-space: var(--space-m-l);
   margin-block-start: var(--_flow-space);
 }
 
 .wrapper {
   --_gutter: 1rem;
 
-  width: clamp(16rem, 95vw, 75rem);
+  width: clamp(16rem, 95vw, 90rem);
   margin-inline: auto;
   padding-inline: var(--_gutter);
   position: relative;

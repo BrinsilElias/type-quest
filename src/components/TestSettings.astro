@@ -43,11 +43,11 @@ import Setting from './Setting.astro';
     <legend class="sr-only">Punctuation and Numbers</legend>
     <menu>
       <Setting id="punctuation" value="punctuation" type="checkbox">
-        <AtIcon />
+        <AtIcon style="stroke: var(--fg-color);" />
         Punctuation
       </Setting>
       <Setting id="numbers" value="numbers" type="checkbox">
-        <HashIcon />
+        <HashIcon style="stroke: var(--fg-color);" />
         Numbers
       </Setting>
     </menu>
@@ -60,13 +60,14 @@ import Setting from './Setting.astro';
         value="timer"
         type="radio"
         name="typing-mode"
-        checked><Clock />Timer Mode</Setting
+        checked><Clock style="stroke: var(--fg-color);" />Timer Mode</Setting
       >
       <Setting
         id="word-count-mode"
         value="wordCount"
         type="radio"
-        name="typing-mode"><WordCount />Word Count Mode</Setting
+        name="typing-mode"
+        ><WordCount style="stroke: var(--fg-color);" />Word Count Mode</Setting
       >
     </menu>
   </fieldset>

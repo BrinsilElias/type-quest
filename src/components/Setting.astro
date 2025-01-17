@@ -15,10 +15,11 @@ const { id, value, name, type, checked } = Astro.props;
     display: flex;
     align-items: center;
     gap: 2px;
+    color: var(--fg-color);
     font-weight: var(--font-weight-6);
     cursor: pointer;
     &:has(input[type='radio']:checked, input[type='checkbox']:checked) {
-      color: var(--accent-color);
+      --fg-color: var(--accent-color);
     }
   }
   input[type='radio'],

@@ -12,7 +12,6 @@ import Refresh from '../assets/refresh-cw.svg';
     margin-inline: auto;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-xs);
     background-color: var(--_clr-input-background);
     border: 1px solid var(--_clr-input-border);
     border-radius: var(--border-radius-lg);
@@ -27,7 +26,7 @@ import Refresh from '../assets/refresh-cw.svg';
     &:active {
       outline: none;
     }
-    font-size: var(--font-size-md);
+    font-size: var(--font-fluid-md);
     font-weight: var(--font-weight-5);
     color: var(--clr-accent-light);
   }
@@ -54,7 +53,7 @@ import Refresh from '../assets/refresh-cw.svg';
   }
 </style>
 
-<div class="input-field-wrapper" style="--_flow-space: var(--space-l-xl);">
+<div class="input-field-wrapper">
   <input type="text" id="keyboard-input" autocomplete="off" />
-  <button type="button">Redo<Refresh /></button>
+  <button type="button">Redo<Refresh style="stroke: var(--_clr-button-text);" /></button>
 </div>
