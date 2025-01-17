@@ -2,10 +2,6 @@
 
 /* TL;DR: Components styles */
 
-.hero {
-  margin-block-start: var(--space-l-2xl);
-}
-
 .hero :is(h1, h2) {
   text-transform: uppercase;
 }

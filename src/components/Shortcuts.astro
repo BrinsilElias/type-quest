@@ -14,7 +14,7 @@ const { key, label } = Astro.props;
 
     color: var(--_clr-key-text);
     border: none;
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-sm);
     font-weight: var(--font-weight-4);
     font-family: var(--font-family-primary);
     padding: var(--space-3xs) var(--space-2xs);
@@ -41,6 +41,10 @@ const { key, label } = Astro.props;
 <script>
   const userAgent = window.navigator.userAgent;
   const isMac = userAgent.includes('Mac');
-  const key = isMac ? '⌘ + T' : 'Ctrl + T';
-  $('kbd').text(key);
+  if (isMac) {
+    $('kbd').each((_, el) => {
+      const text = $(el).text();
+      $(el).text(text.replace('Ctrl', '⌘'));
+    });
+  }
 </script>

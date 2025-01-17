@@ -3,7 +3,7 @@
 /* TL;DR: Layouts and structural styles */
 
 .grid {
-  --_gutter: var(--space-2xl);
+  --_gutter: var(--space-xl);
   --_grid-min-item-size: 20ch;
 
   display: grid;
