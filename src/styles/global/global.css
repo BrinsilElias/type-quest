@@ -72,10 +72,10 @@ main:focus {
   outline: none;
 }
 
-main > ul[role='list'],
+main>ul[role='list'],
 header,
 section,
-article > *,
+article>*,
 aside {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -95,4 +95,23 @@ footer {
 fieldset {
   border: 0;
   padding: 0;
+}
+
+button {
+  --_clr-button-background: var(--clr-neutral-100);
+  --_clr-button-text: var(--fg-color);
+
+  display: inline-flex;
+  gap: var(--space-3xs);
+  padding: var(--space-2xs);
+  border-radius: var(--border-radius-md);
+  border: none;
+  font-weight: var(--font-weight-5);
+  color: var(--_clr-button-text);
+  background-color: var(--_clr-button-background);
+  cursor: pointer;
+
+  svg {
+    stroke: var(--_clr-button-text);
+  }
 }

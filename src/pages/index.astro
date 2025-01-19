@@ -63,6 +63,10 @@ const { version } = JSON.parse(packageJson);
         text-decoration: none;
       }
     }
+
+    a svg {
+      stroke: var(--clr-neutral-600);
+    }
   }
 </style>
 
@@ -85,19 +89,14 @@ const { version } = JSON.parse(packageJson);
     </div>
     <ul class="cluster" style="--_justify-content: center; --_gutter: 2rem">
       <li>
-        <a href="https://github.com/BrinsilElias/type-quest"
-          ><Github style="stroke: var(--clr-neutral-600)" />Github</a
+        <a href="https://github.com/BrinsilElias/type-quest"><Github />Github</a
         >
       </li>
       <li>
-        <a href="#"
-          ><Palette style="stroke: var(--clr-neutral-600)" />Light Theme</a
-        >
+        <a href="#"><Palette />Light Theme</a>
       </li>
       <li>
-        <a href="#"
-          ><Version style="stroke: var(--clr-neutral-600)" />v{version}</a
-        >
+        <a href="#"><Version />v{version}</a>
       </li>
     </ul>
   </footer>
