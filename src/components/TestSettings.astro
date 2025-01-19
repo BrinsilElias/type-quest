@@ -1,4 +1,5 @@
 ---
+import Gear from '../assets/gear.svg';
 import Clock from '../assets/clock.svg';
 import AtIcon from '../assets/at-icon.svg';
 import HashIcon from '../assets/hash-icon.svg';
@@ -8,13 +9,14 @@ import Setting from './Setting.astro';
 ---
 
 <style>
+  .test-controls {
+    container-type: size;
+  }
   form {
-    display: flex;
+    display: none;
     gap: var(--space-m);
     align-items: center;
     justify-items: start;
-    margin-inline: auto;
-    width: max-content;
     padding: var(--space-xs);
     background-color: var(--clr-neutral-100);
     border: 1px solid var(--clr-border-light);
@@ -22,6 +24,10 @@ import Setting from './Setting.astro';
     box-shadow:
       0px 12px 16px -4px rgba(16, 24, 40, 0.08),
       0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+
+    svg {
+      stroke: var(--fg-color);
+    }
   }
   fieldset:not(:nth-child(3)) {
     padding-right: var(--space-m);
@@ -36,75 +42,92 @@ import Setting from './Setting.astro';
     padding: 0;
     margin: 0;
   }
+  button {
+    display: flex;
+    box-shadow:
+      0px 12px 16px -4px rgba(16, 24, 40, 0.08),
+      0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+  }
+  @container (min-width: 43.5rem) {
+    button {
+      display: none;
+    }
+    form {
+      display: flex;
+    }
+  }
 </style>
 
-<form action="#">
-  <fieldset class="text-config">
-    <legend class="sr-only">Punctuation and Numbers</legend>
-    <menu>
-      <Setting id="punctuation" value="punctuation" type="checkbox">
-        <AtIcon style="stroke: var(--fg-color);" />
-        Punctuation
-      </Setting>
-      <Setting id="numbers" value="numbers" type="checkbox">
-        <HashIcon style="stroke: var(--fg-color);" />
-        Numbers
-      </Setting>
-    </menu>
-  </fieldset>
-  <fieldset class="mode-config">
-    <legend class="sr-only">Typing Mode</legend>
-    <menu>
-      <Setting
-        id="timer-mode"
-        value="timer"
-        type="radio"
-        name="typing-mode"
-        checked><Clock style="stroke: var(--fg-color);" />Timer Mode</Setting
-      >
-      <Setting
-        id="word-count-mode"
-        value="wordCount"
-        type="radio"
-        name="typing-mode"
-        ><WordCount style="stroke: var(--fg-color);" />Word Count Mode</Setting
-      >
-    </menu>
-  </fieldset>
-  <fieldset class="timer-config">
-    <legend class="sr-only">Timer</legend>
-    <menu>
-      <Setting id="timer-15" value="15" type="radio" name="timer" checked
-        >15</Setting
-      >
-      <Setting id="timer-30" value="30" type="radio" name="timer">30</Setting>
-      <Setting id="timer-60" value="60" type="radio" name="timer">60</Setting>
-      <Setting id="timer-120" value="120" type="radio" name="timer">120</Setting
-      >
-    </menu>
-  </fieldset>
-  <fieldset class="word-count-config">
-    <legend class="sr-only">Word Count</legend>
-    <menu>
-      <Setting
-        id="word-count-10"
-        value="10"
-        type="radio"
-        name="word-count"
-        checked>10</Setting
-      >
-      <Setting id="word-count-25" value="25" type="radio" name="word-count"
-        >25</Setting
-      >
-      <Setting id="word-count-50" value="50" type="radio" name="word-count"
-        >50</Setting
-      >
-      <Setting id="word-count-100" value="100" type="radio" name="word-count"
-        >100</Setting
-      >
-    </menu>
-  </fieldset>
-</form>
+<div class="test-controls cluster" style="--_justify-content: center;">
+  <button><Gear />Settings</button>
+  <form action="#" method="dialog">
+    <fieldset class="text-config">
+      <legend class="sr-only">Punctuation and Numbers</legend>
+      <menu>
+        <Setting id="punctuation" value="punctuation" type="checkbox">
+          <AtIcon />
+          Punctuation
+        </Setting>
+        <Setting id="numbers" value="numbers" type="checkbox">
+          <HashIcon />
+          Numbers
+        </Setting>
+      </menu>
+    </fieldset>
+    <fieldset class="mode-config">
+      <legend class="sr-only">Typing Mode</legend>
+      <menu>
+        <Setting
+          id="timer-mode"
+          value="timer"
+          type="radio"
+          name="typing-mode"
+          checked><Clock />Timer Mode</Setting
+        >
+        <Setting
+          id="word-count-mode"
+          value="wordCount"
+          type="radio"
+          name="typing-mode"><WordCount />Word Count Mode</Setting
+        >
+      </menu>
+    </fieldset>
+    <fieldset class="timer-config">
+      <legend class="sr-only">Timer</legend>
+      <menu>
+        <Setting id="timer-15" value="15" type="radio" name="timer" checked
+          >15</Setting
+        >
+        <Setting id="timer-30" value="30" type="radio" name="timer">30</Setting>
+        <Setting id="timer-60" value="60" type="radio" name="timer">60</Setting>
+        <Setting id="timer-120" value="120" type="radio" name="timer"
+          >120</Setting
+        >
+      </menu>
+    </fieldset>
+    <fieldset class="word-count-config">
+      <legend class="sr-only">Word Count</legend>
+      <menu>
+        <Setting
+          id="word-count-10"
+          value="10"
+          type="radio"
+          name="word-count"
+          checked>10</Setting
+        >
+        <Setting id="word-count-25" value="25" type="radio" name="word-count"
+          >25</Setting
+        >
+        <Setting id="word-count-50" value="50" type="radio" name="word-count"
+          >50</Setting
+        >
+        <Setting id="word-count-100" value="100" type="radio" name="word-count"
+          >100</Setting
+        >
+      </menu>
+    </fieldset>
+  </form>
+</div>
 
 <script>
   const typingMode = $('input[name="typing-mode"]:checked').val() as
