@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import Shortcuts from '../components/Shortcuts.astro';
 import InputField from '../components/InputField.astro';
 import TestSettings from '../components/TestSettings.astro';
+import ThemeSelector from '../components/ThemeSelector.astro';
 
 import Github from '../assets/github.svg';
 import Palette from '../assets/palette.svg';
@@ -18,20 +19,17 @@ const { version } = JSON.parse(packageJson);
   h1 {
     margin-top: var(--space-m-l);
   }
-  .timer {
-    font-family: var(--font-family-secondary);
-    font-weight: var(--font-weight-6);
-    font-size: var(--font-fluid-md);
-    color: var(--accent-color);
-  }
   .text-field {
     position: relative;
+    column-gap: 0.5ch;
+    row-gap: 0;
     color: var(--fg-color-light);
     font-family: var(--font-family-secondary);
     font-weight: var(--font-weight-5);
     font-size: var(--font-fluid-lg);
     height: 3lh;
     overflow: hidden;
+    text-wrap: pretty;
 
     &::before {
       content: '';
@@ -50,50 +48,49 @@ const { version } = JSON.parse(packageJson);
     .cluster {
       margin-bottom: var(--space-xs);
     }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      a {
-        display: flex;
-        align-items: center;
-        gap: var(--space-3xs);
-        color: var(--clr-neutral-600);
-        font-weight: var(--font-weight-5);
-        text-decoration: none;
+    a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3xs);
+      color: var(--clr-neutral-600);
+      font-weight: var(--font-weight-5);
+      text-decoration: none;
+      svg {
+        stroke: var(--clr-neutral-600);
       }
-    }
-
-    a svg {
-      stroke: var(--clr-neutral-600);
     }
   }
 </style>
 
 <Layout title="TypeQuest">
+  <ThemeSelector />
   <header>
     <h1 class="text-center">Type Quest</h1>
   </header>
   <main>
     <section class="region flow wrapper" style="--_region-space: 2rem;">
       <TestSettings />
-      <p class="timer | word-count">00:15</p>
-      <section class="text-field"></section>
+      <p><time>00:15</time></p>
+      <section class="text-field cluster"></section>
       <InputField />
     </section>
   </main>
   <footer>
-    <div class="cluster" style="--_justify-content: center; --_gutter: 1rem">
+    <section
+      class="cluster"
+      style="--_justify-content: center; --_gutter: 1rem"
+    >
       <Shortcuts key="Ctrl + T" label="Change Theme" />
       <Shortcuts key="Ctrl + R" label="Restart Test" />
-    </div>
+    </section>
     <ul class="cluster" style="--_justify-content: center; --_gutter: 2rem">
       <li>
         <a href="https://github.com/BrinsilElias/type-quest"><Github />Github</a
         >
       </li>
       <li>
-        <a href="#"><Palette />Light Theme</a>
+        <a class="theme-switch" href="#" role="button"><Palette />Light Theme</a
+        >
       </li>
       <li>
         <a href="#"><Version />v{version}</a>
@@ -101,3 +98,12 @@ const { version } = JSON.parse(packageJson);
     </ul>
   </footer>
 </Layout>
+
+<script>
+  const themeSelector = document.querySelector('dialog');
+  const themeSwitch = $('.theme-switch');
+  themeSwitch.on('click', function (e) {
+    e.preventDefault();
+    themeSelector?.showModal();
+  });
+</script>

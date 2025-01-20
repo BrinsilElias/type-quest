@@ -8,7 +8,7 @@ import Refresh from '../assets/refresh-cw.svg';
     --_clr-input-border: var(--clr-border-light);
 
     display: flex;
-    width: min(600px, 100% - 1rem);
+    max-width: 600px;
     margin-inline: auto;
     align-items: center;
     justify-content: space-between;
@@ -21,19 +21,19 @@ import Refresh from '../assets/refresh-cw.svg';
       0px 4px 6px -2px rgba(16, 24, 40, 0.03);
   }
   input {
+    font-size: var(--font-fluid-md);
+    font-weight: var(--font-weight-5);
+    color: var(--clr-accent-light);
     border: none;
+    min-width: 0;
     &:focus,
     &:active {
       outline: none;
     }
-    font-size: var(--font-fluid-md);
-    font-weight: var(--font-weight-5);
-    color: var(--clr-accent-light);
   }
   button {
     --_clr-button-background: var(--clr-accent-light);
     --_clr-button-text: var(--clr-neutral-100);
-
     background: linear-gradient(
         133.67deg,
         rgba(255, 255, 255, 0.2) 14.33%,
@@ -43,10 +43,7 @@ import Refresh from '../assets/refresh-cw.svg';
     box-shadow:
       2px 3px 4px rgba(81, 56, 238, 0.05),
       0px 0px 0px 1.5px rgba(81, 56, 238, 0.2);
-  }
-  input,button {
-    flex: 0 1 auto;
-  }
+  } 
 </style>
 
 <div class="input-field-wrapper">

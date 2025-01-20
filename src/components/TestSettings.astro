@@ -9,14 +9,8 @@ import Setting from './Setting.astro';
 ---
 
 <style>
-  .test-controls {
-    container-type: size;
-  }
   form {
-    display: none;
     gap: var(--space-m);
-    align-items: center;
-    justify-items: start;
     padding: var(--space-xs);
     background-color: var(--clr-neutral-100);
     border: 1px solid var(--clr-border-light);
@@ -34,36 +28,23 @@ import Setting from './Setting.astro';
     border-right: 3px solid var(--clr-border-dark);
   }
   menu {
-    display: flex;
-    align-items: center;
     justify-content: center;
     gap: var(--space-s);
-    list-style: none;
-    padding: 0;
-    margin: 0;
   }
   button {
-    display: flex;
+    display: none;
     box-shadow:
       0px 12px 16px -4px rgba(16, 24, 40, 0.08),
       0px 4px 6px -2px rgba(16, 24, 40, 0.03);
   }
-  @container (min-width: 43.5rem) {
-    button {
-      display: none;
-    }
-    form {
-      display: flex;
-    }
-  }
 </style>
 
 <div class="test-controls cluster" style="--_justify-content: center;">
-  <button><Gear />Settings</button>
-  <form action="#" method="dialog">
+  <button type="button"><Gear />Settings</button>
+  <form class="cluster" action="#" method="dialog">
     <fieldset class="text-config">
       <legend class="sr-only">Punctuation and Numbers</legend>
-      <menu>
+      <menu class="cluster">
         <Setting id="punctuation" value="punctuation" type="checkbox">
           <AtIcon />
           Punctuation
@@ -76,7 +57,7 @@ import Setting from './Setting.astro';
     </fieldset>
     <fieldset class="mode-config">
       <legend class="sr-only">Typing Mode</legend>
-      <menu>
+      <menu class="cluster">
         <Setting
           id="timer-mode"
           value="timer"
@@ -94,7 +75,7 @@ import Setting from './Setting.astro';
     </fieldset>
     <fieldset class="timer-config">
       <legend class="sr-only">Timer</legend>
-      <menu>
+      <menu class="cluster">
         <Setting id="timer-15" value="15" type="radio" name="timer" checked
           >15</Setting
         >
@@ -107,7 +88,7 @@ import Setting from './Setting.astro';
     </fieldset>
     <fieldset class="word-count-config">
       <legend class="sr-only">Word Count</legend>
-      <menu>
+      <menu class="cluster">
         <Setting
           id="word-count-10"
           value="10"
@@ -130,12 +111,18 @@ import Setting from './Setting.astro';
 </div>
 
 <script>
+  const $testControlBtn = $('test-controls button');
   const typingMode = $('input[name="typing-mode"]:checked').val() as
     | 'timer'
     | 'wordCount';
+
   if (typingMode === 'timer') {
     $('fieldset.word-count-config').hide();
   } else {
     $('fieldset.timer-config').hide();
   }
+
+  $testControlBtn.on('click', () => {
+    // Open a dialog with the form
+  });
 </script>

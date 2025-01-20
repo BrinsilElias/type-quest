@@ -1,0 +1,124 @@
+---
+import CloseIcon from '../assets/x-icon.svg';
+
+const themes = ['Light Theme', 'Dark Theme', 'Blue Theme', 'Green Theme'];
+---
+
+<style>
+  dialog {
+    width: min(400px, 100% - 1.5rem);
+    padding: var(--space-s);
+    svg {
+      stroke: var(--fg-color);
+    }
+    header {
+      margin-bottom: var(--space-m);
+      h2 {
+        font-weight: var(--font-weight-6);
+        margin-bottom: 0.5rem;
+      }
+      p {
+        color: var(--clr-neutral-600);
+      }
+    }
+    li {
+      position: relative;
+      padding: var(--space-xs);
+      border-radius: var(--border-radius-md);
+      border: 1px solid var(--clr-border-light);
+
+      &:has(input[type='radio']:checked) {
+        border: 2px solid var(--clr-accent-light);
+      }
+    }
+    button {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .form-control {
+      display: grid;
+      grid-template-columns: 1em auto;
+      gap: 0.5em;
+
+      input[type='radio'] {
+        width: 1.15em;
+        height: 1.15em;
+        border: 0.15em solid currentColor;
+        border-radius: 50%;
+      }
+      input[type='radio']::before {
+        content: '';
+        width: 0.65em;
+        height: 0.65em;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 1em 1em var(--clr-accent-light);
+      }
+      input[type='radio']:checked::before {
+        transform: scale(1);
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        cursor: pointer;
+      }
+    }
+    .color-palette {
+      display: flex;
+      height: 1.5rem;
+      margin-left: auto;
+      overflow: hidden;
+      border-radius: var(--border-radius-md);
+      .theme-color {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: var(--color);
+      }
+    }
+  }
+</style>
+
+<dialog>
+  <form method="dialog">
+    <header>
+      <section>
+        <h2>Change Appearance</h2>
+        <p>Select any color scheme below to change the appearance.</p>
+      </section>
+      <button type="button">
+        <CloseIcon />
+      </button>
+    </header>
+    <menu class="flow" style="--_flow-space: 0.5rem;">
+      {
+        themes.map((theme) => (
+          <li class="cluster">
+            <label class="form-control">
+              <input type="radio" name="theme-selector" id="" />
+              {theme}
+            </label>
+            <span class="color-palette">
+              <span class="theme-color" style="--color: #D3E3E2" />
+              <span class="theme-color" style="--color: #E1C7A5" />
+              <span class="theme-color" style="--color: #EAB875" />
+              <span class="theme-color" style="--color: #7BC5C1" />
+            </span>
+          </li>
+        ))
+      }
+    </menu>
+  </form>
+</dialog>
+
+<script>
+  const dialog = document.querySelector('dialog');
+  const closeButton = $('button');
+  closeButton.on('click', () => {
+    dialog?.close();
+  });
+</script>
