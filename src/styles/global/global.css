@@ -47,7 +47,6 @@ blockquote:not([class]) {
 }
 
 svg {
-  height: 2.5ex;
   width: auto;
   flex: none;
 }
@@ -72,10 +71,10 @@ main:focus {
   outline: none;
 }
 
-main>ul[role='list'],
+main > ul[role='list'],
 header,
 section,
-article>*,
+article > *,
 aside {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -128,6 +127,7 @@ button {
   --_clr-button-background: var(--clr-neutral-100);
   --_clr-button-text: var(--fg-color);
 
+  min-width: max-content;
   display: inline-flex;
   gap: var(--space-3xs);
   padding: var(--space-2xs);
@@ -151,7 +151,8 @@ menu {
 }
 
 .form-control {
-  input[type='radio'] {
+  input[type='radio'],
+  input[type='checkbox'] {
     -webkit-appearance: none;
     appearance: none;
     background-color: #fff;
