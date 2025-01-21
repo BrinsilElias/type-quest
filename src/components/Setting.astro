@@ -21,6 +21,11 @@ const { id, value, name, type, checked } = Astro.props;
     &:has(input[type='radio']:checked, input[type='checkbox']:checked) {
       --fg-color: var(--accent-color);
     }
+
+    &:has(input[type='radio']:focus, input[type='checkbox']:focus) {
+      outline: var(--outline-size) var(--accent-color) solid;
+      outline-offset: var(--outline-offset);
+    }
   }
   input[type='radio'],
   input[type='checkbox'] {
@@ -33,7 +38,7 @@ const { id, value, name, type, checked } = Astro.props;
   }
 </style>
 
-<li>
+<li role="menuitem">
   <label class="form-control">
     <input id={id} type={type} name={name} value={value} checked={checked} />
     <slot />

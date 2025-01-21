@@ -3,7 +3,7 @@ import Refresh from '../assets/refresh-cw.svg';
 ---
 
 <style>
-  .input-field-wrapper {
+  .input-field-control {
     --_clr-input-background: var(--clr-neutral-100);
     --_clr-input-border: var(--clr-border-light);
 
@@ -19,6 +19,11 @@ import Refresh from '../assets/refresh-cw.svg';
     box-shadow:
       0px 12px 16px -4px rgba(16, 24, 40, 0.08),
       0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+
+    &:has(input[type='text']:focus) {
+      outline: var(--outline-size) var(--accent-color) solid;
+      outline-offset: var(--outline-offset);
+    }
   }
   input {
     font-size: var(--font-fluid-md);
@@ -34,19 +39,19 @@ import Refresh from '../assets/refresh-cw.svg';
   button {
     --_clr-button-background: var(--clr-accent-light);
     --_clr-button-text: var(--clr-neutral-100);
-    background: linear-gradient(
-        133.67deg,
-        rgba(255, 255, 255, 0.2) 14.33%,
-        rgba(255, 255, 255, 0) 33.02%
-      ),
-      linear-gradient(0deg, #4f46e5, #4f46e5), #ffffff;
-    box-shadow:
-      2px 3px 4px rgba(81, 56, 238, 0.05),
-      0px 0px 0px 1.5px rgba(81, 56, 238, 0.2);
-  } 
+
+    &:hover {
+    }
+    &:focus {
+      outline: var(--outline-size) var(--accent-color) solid;
+      outline-offset: var(--outline-offset);
+    }
+    &:active {
+    }
+  }
 </style>
 
-<div class="input-field-wrapper">
+<div role="group" class="input-field-control" aria-label="Input Field">
   <input type="text" id="keyboard-input" autocomplete="off" />
   <button type="button">Redo<Refresh /></button>
 </div>

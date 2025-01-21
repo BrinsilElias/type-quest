@@ -90,14 +90,14 @@ const themes = ['Light Theme', 'Dark Theme', 'Blue Theme', 'Green Theme'];
         <h2>Change Appearance</h2>
         <p>Select any color scheme below to change the appearance.</p>
       </section>
-      <button type="button">
+      <button type="button" aria-label="Close">
         <CloseIcon />
       </button>
     </header>
     <menu class="flow" style="--_flow-space: 0.5rem;">
       {
         themes.map((theme) => (
-          <li class="cluster">
+          <li role="menuitem" class="cluster">
             <label class="form-control">
               <input type="radio" name="theme-selector" id="" />
               {theme}
