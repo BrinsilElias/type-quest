@@ -1,4 +1,7 @@
+import Caret from './caret';
+
 class TypeQuest {
+  caret!: Caret;
   language: string;
   wordCount: number;
   timerDuration: number;
@@ -92,6 +95,12 @@ class TypeQuest {
         });
         $container.append(wordSpan).append(' ');
       }
+      this.caret = new Caret();
+      this.caret.setCaretPosition(
+        this.currentWordIndex,
+        this.currentLetterIndex,
+      );
+      this.caret.setCaretStyle();
     } catch (error) {
       console.error(error);
     }
@@ -122,6 +131,15 @@ class TypeQuest {
     $wordListContainer: JQuery<HTMLElement>,
   ) {
     this.fetchWordList($wordListContainer);
+    $inputField.one('keydown', (event) => {
+      if (
+        event.key !== ' ' &&
+        event.key !== 'Backspace' &&
+        /^[a-zA-Z]$/.test(event.key)
+      ) {
+        this.caret.removeCaretBlink();
+      }
+    });
     $inputField.on('keydown', (event) => {
       if (
         this.currentWordIndex === 0 &&
@@ -130,18 +148,30 @@ class TypeQuest {
       ) {
         this.startTimer();
       }
-      if (event.key !== ' ' && event.key !== 'Backspace') {
+      if (
+        event.key !== ' ' &&
+        event.key !== 'Backspace' &&
+        /^[a-zA-Z]$/.test(event.key)
+      ) {
         const typedKey = event.key;
         const currentWord = this.generatedWords[this.currentWordIndex] || '';
         const currentLetter = currentWord[this.currentLetterIndex];
         if (typedKey === currentLetter) {
-          // Move caret and add green highlight
+          // add green highlight
         }
+        this.caret.moveCaretPosition(
+          this.currentWordIndex,
+          this.currentLetterIndex,
+        );
         this.currentLetterIndex++;
       }
       if (event.key === 'Backspace') {
         if (this.currentLetterIndex > 0) {
           this.currentLetterIndex--;
+          this.caret.moveCaretPosition(
+            this.currentWordIndex,
+            this.currentLetterIndex,
+          );
         }
       }
       if (event.key === ' ') {
@@ -173,6 +203,10 @@ class TypeQuest {
               }
               break;
           }
+          this.caret.setCaretPosition(
+            this.currentWordIndex,
+            this.currentLetterIndex,
+          );
         }
         $inputField.val('');
       }

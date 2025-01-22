@@ -28,7 +28,6 @@ const { version } = JSON.parse(packageJson);
     overflow: hidden;
   }
   .text-field {
-    position: relative;
     column-gap: 0.5ch;
     row-gap: 0;
     color: var(--fg-color-light);
@@ -38,14 +37,9 @@ const { version } = JSON.parse(packageJson);
     height: 3lh;
     overflow: hidden;
     text-wrap: pretty;
-
-    &::before {
-      content: '';
-      display: block;
+    
+    #caret {
       position: absolute;
-      width: 0.1em;
-      height: 2rem;
-      top: 8px;
       background-color: var(--accent-color);
       animation: caretFlashSmooth 1s infinite;
     }
@@ -84,7 +78,9 @@ const { version } = JSON.parse(packageJson);
     <section class="region flow wrapper" style="--_region-space: 2rem;">
       <TestSettings />
       <p><time datetime="0m 15s">00:15</time></p>
-      <section class="text-field cluster"></section>
+      <section class="text-field cluster">
+        <span id="caret"></span>
+      </section>
       <InputField />
     </section>
   </main>
