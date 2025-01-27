@@ -26,7 +26,7 @@ import Setting from './Setting.astro';
       stroke: var(--fg-color);
     }
   }
-  fieldset:not(:nth-child(3)) {
+  fieldset:not(:nth-last-child(-n + 2)) {
     padding-right: var(--space-m);
     border-right: 3px solid var(--clr-border-dark);
   }
@@ -106,13 +106,44 @@ import Setting from './Setting.astro';
 </form>
 
 <script>
-  const typingMode = $('input[name="typing-mode"]:checked').val() as
+  import { fmtTimeInterval } from '../scripts/utility.ts';
+
+  const $typingModeInputs = $('input[name="typing-mode"]');
+  const $wordCountConfig = $('fieldset.word-count-config');
+  const $timerConfig = $('fieldset.timer-config');
+  const $timerInput = $('input[name="timer"]');
+  const $timerDisplay = $('time');
+
+  const toggleModeVisibility = (mode: 'timer' | 'wordCount') => {
+    const isTimerMode = mode === 'timer';
+    $wordCountConfig.toggle(!isTimerMode);
+    $timerConfig.toggle(isTimerMode);
+  };
+
+  const updateTimerDisplay = (duration: number) => {
+    $timerDisplay
+      .text(fmtTimeInterval(duration))
+      .attr('datetime', fmtTimeInterval(duration, 'Xm Ys'));
+  };
+
+  const initialDuration = Number($timerInput.val());
+  const initialMode = $typingModeInputs.filter(':checked').val() as
     | 'timer'
     | 'wordCount';
+  updateTimerDisplay(initialDuration);
+  toggleModeVisibility(initialMode);
 
-  if (typingMode === 'timer') {
-    $('fieldset.word-count-config').hide();
-  } else {
-    $('fieldset.timer-config').hide();
-  }
+  $typingModeInputs.on('change', () => {
+    const mode = $typingModeInputs.filter(':checked').val() as
+      | 'timer'
+      | 'wordCount';
+    toggleModeVisibility(mode);
+  });
+
+  $timerInput.on('change', () => {
+    const duration = Number($timerInput.filter(':checked').val());
+    if (!isNaN(duration)) {
+      updateTimerDisplay(duration);
+    }
+  });
 </script>

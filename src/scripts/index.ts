@@ -7,7 +7,7 @@ const language = 'english';
 const includeNumbers = $('#numbers').is(':checked');
 const includePunctuation = $('#punctuation').is(':checked');
 const wordCount = $('input[name="word-count"]').val() as number;
-const timerDuration = $('input[name="timer-countdown"]').val() as number;
+const timerDuration = $('input[name="timer"]').val() as number;
 const typingMode = $('input[name="typing-mode"]:checked').val() as
   | 'timer'
   | 'wordCount';
@@ -19,7 +19,7 @@ function init() {
     timerDuration,
     includeNumbers,
     includePunctuation,
-    typingMode
+    typingMode,
   );
 
   tq.startGame($typingInput, $textFieldContainer);
