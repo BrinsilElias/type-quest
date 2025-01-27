@@ -1,4 +1,5 @@
 import Caret from './caret';
+import { fmtTimeInterval } from './utility';
 
 class TypeQuest {
   caret!: Caret;
@@ -43,25 +44,6 @@ class TypeQuest {
     this.displayResults = this.displayResults.bind(this);
   }
 
-  startTimer() {
-    this.isTimerActive = true;
-    switch (this.typingMode) {
-      case 'timer':
-        let remainingSeconds = this.timerDuration;
-        const timerId = window.setInterval(() => {
-          remainingSeconds--;
-          if (remainingSeconds === 0) {
-            window.clearInterval(timerId);
-            this.isTimerActive = false;
-          }
-        }, 1000);
-        break;
-      case 'wordCount':
-        this.startTime = Date.now();
-        break;
-    }
-  }
-
   async fetchWordList($container: JQuery<HTMLElement>) {
     try {
       let randomWords: string[];
@@ -100,9 +82,31 @@ class TypeQuest {
         this.currentWordIndex,
         this.currentLetterIndex,
       );
-      this.caret.setCaretStyle();
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  startTimer() {
+    this.isTimerActive = true;
+    switch (this.typingMode) {
+      case 'timer':
+        const $timerDisplay = $('time');
+        let remainingSeconds = this.timerDuration;
+        const timerId = window.setInterval(() => {
+          remainingSeconds--;
+          $timerDisplay
+            .text(fmtTimeInterval(remainingSeconds, 'MM:SS'))
+            .attr('datetime', fmtTimeInterval(remainingSeconds, 'Xm Ys'));
+          if (remainingSeconds === 0) {
+            window.clearInterval(timerId);
+            this.isTimerActive = false;
+          }
+        }, 1000);
+        break;
+      case 'wordCount':
+        this.startTime = Date.now();
+        break;
     }
   }
 
@@ -131,15 +135,6 @@ class TypeQuest {
     $wordListContainer: JQuery<HTMLElement>,
   ) {
     this.fetchWordList($wordListContainer);
-    $inputField.one('keydown', (event) => {
-      if (
-        event.key !== ' ' &&
-        event.key !== 'Backspace' &&
-        /^[a-zA-Z]$/.test(event.key)
-      ) {
-        this.caret.removeCaretBlink();
-      }
-    });
     $inputField.on('keydown', (event) => {
       if (
         this.currentWordIndex === 0 &&
@@ -171,6 +166,7 @@ class TypeQuest {
           this.caret.moveCaretPosition(
             this.currentWordIndex,
             this.currentLetterIndex,
+            true,
           );
         }
       }

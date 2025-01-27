@@ -28,6 +28,7 @@ const { version } = JSON.parse(packageJson);
     overflow: hidden;
   }
   .text-field {
+    position: relative;
     column-gap: 0.5ch;
     row-gap: 0;
     color: var(--fg-color-light);
@@ -37,11 +38,27 @@ const { version } = JSON.parse(packageJson);
     height: 3lh;
     overflow: hidden;
     text-wrap: pretty;
-    
-    #caret {
-      position: absolute;
-      background-color: var(--accent-color);
-      animation: caretFlashSmooth 1s infinite;
+
+    .letter.active {
+      --_right: 0;
+      --_left: 0;
+      --_caret-animation: caretFlashSmooth 1s infinite;
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: var(--_right);
+        left: var(--_left);
+        width: 0.1em;
+        height: 2rem;
+        position: absolute;
+        background-color: var(--accent-color);
+        animation: var(--_caret-animation);
+        transition: width 0.2s ease-in;
+      }
     }
   }
   footer {
@@ -78,9 +95,7 @@ const { version } = JSON.parse(packageJson);
     <section class="region flow wrapper" style="--_region-space: 2rem;">
       <TestSettings />
       <p><time datetime="0m 15s">00:15</time></p>
-      <section class="text-field cluster">
-        <span id="caret"></span>
-      </section>
+      <section class="text-field cluster"></section>
       <InputField />
     </section>
   </main>
