@@ -11,6 +11,7 @@ class TypeQuest {
   typingMode: 'timer' | 'wordCount';
 
   private startTime: number;
+  private typedWords: string[];
   private matchedWords: string[];
   private isTimerActive: boolean;
   private currentWordIndex: number;
@@ -33,12 +34,14 @@ class TypeQuest {
     this.includePunctuation = includePunctuation;
 
     this.startTime = 0;
+    this.typedWords = [];
     this.matchedWords = [];
     this.generatedWords = [];
     this.currentWordIndex = 0;
     this.currentLetterIndex = 0;
     this.isTimerActive = false;
 
+    this.startGame = this.startGame.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.fetchWordList = this.fetchWordList.bind(this);
     this.displayResults = this.displayResults.bind(this);
@@ -67,6 +70,7 @@ class TypeQuest {
       if (this.typingMode === 'timer') {
         this.wordCount = 300;
       }
+      $container.empty();
       while (this.generatedWords.length < this.wordCount) {
         const randomIndex = Math.floor(Math.random() * randomWords.length);
         const randomWord = randomWords[randomIndex] || '';
@@ -101,6 +105,7 @@ class TypeQuest {
           if (remainingSeconds === 0) {
             window.clearInterval(timerId);
             this.isTimerActive = false;
+            this.displayResults();
           }
         }, 1000);
         break;
@@ -123,7 +128,7 @@ class TypeQuest {
         break;
     }
     const accuracy = Math.floor(
-      (totalWordsTyped / this.generatedWords.length) * 100,
+      (totalWordsTyped / this.typedWords.length) * 100,
     );
     const wordsPerMinute = Math.floor(totalWordsTyped / minutesElapsed);
     console.log(`WPM: ${wordsPerMinute}`);
@@ -179,7 +184,6 @@ class TypeQuest {
             case 'timer':
               if (!this.isTimerActive) {
                 $inputField.prop('disabled', true);
-                this.displayResults();
                 return;
               }
               if (typedWord === this.generatedWords[this.currentWordIndex]) {
@@ -202,6 +206,12 @@ class TypeQuest {
           this.caret.setCaretPosition(
             this.currentWordIndex,
             this.currentLetterIndex,
+          );
+          $('span.word')
+            .eq(this.currentWordIndex - 1)
+            .addClass('typed');
+          this.typedWords.push(
+            this.generatedWords[this.currentWordIndex] || '',
           );
         }
         $inputField.val('');

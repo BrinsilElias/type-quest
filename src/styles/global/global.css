@@ -71,10 +71,10 @@ main:focus {
   outline: none;
 }
 
-main > ul[role='list'],
+main>ul[role='list'],
 header,
 section,
-article > *,
+article>*,
 aside {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -151,6 +151,7 @@ menu {
 }
 
 .form-control {
+
   input[type='radio'],
   input[type='checkbox'] {
     -webkit-appearance: none;
@@ -164,7 +165,7 @@ menu {
   }
 }
 
-time {
+p.typing-mode {
   font-family: var(--font-family-secondary);
   font-weight: var(--font-weight-6);
   font-size: var(--font-fluid-md);
