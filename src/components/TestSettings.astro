@@ -108,30 +108,45 @@ import Setting from './Setting.astro';
 <script>
   import { fmtTimeInterval } from '../scripts/utility.ts';
 
-  const $typingModeInputs = $('input[name="typing-mode"]');
-  const $wordCountConfig = $('fieldset.word-count-config');
-  const $timerConfig = $('fieldset.timer-config');
+  const $typingMode = $('p.typing-mode');
   const $timerInput = $('input[name="timer"]');
-  const $timerDisplay = $('time');
-
-  const toggleModeVisibility = (mode: 'timer' | 'wordCount') => {
-    const isTimerMode = mode === 'timer';
-    $wordCountConfig.toggle(!isTimerMode);
-    $timerConfig.toggle(isTimerMode);
-  };
-
-  const updateTimerDisplay = (duration: number) => {
-    $timerDisplay
-      .text(fmtTimeInterval(duration))
-      .attr('datetime', fmtTimeInterval(duration, 'Xm Ys'));
-  };
+  const $wordCountInput = $('input[name="word-count"]');
+  const $typingModeInputs = $('input[name="typing-mode"]');
 
   const initialDuration = Number($timerInput.val());
   const initialMode = $typingModeInputs.filter(':checked').val() as
     | 'timer'
     | 'wordCount';
-  updateTimerDisplay(initialDuration);
-  toggleModeVisibility(initialMode);
+
+  const updateTimerDisplay = (duration: number) => {
+    $typingMode.html(
+      `<time\
+        datetime="${fmtTimeInterval(duration, 'Xm Ys')}">\
+        ${fmtTimeInterval(duration)}</time>`,
+    );
+  };
+
+  const updateWordCountDisplay = (wordCount: number) => {
+    $typingMode.html(
+      `<span>0 / <span class="word-count">${wordCount}</span></span>`,
+    );
+  };
+
+  const toggleModeVisibility = (mode: 'timer' | 'wordCount') => {
+    const $timerConfig = $('fieldset.timer-config');
+    const $wordCountConfig = $('fieldset.word-count-config');
+    const isTimerMode = mode === 'timer';
+    $wordCountConfig.toggle(!isTimerMode);
+    $timerConfig.toggle(isTimerMode);
+
+    if (isTimerMode) {
+      let duration = Number($timerInput.filter(':checked').val());
+      updateTimerDisplay(duration);
+    } else {
+      let wordCount = Number($wordCountInput.filter(':checked').val());
+      updateWordCountDisplay(wordCount);
+    }
+  };
 
   $typingModeInputs.on('change', () => {
     const mode = $typingModeInputs.filter(':checked').val() as
@@ -141,9 +156,19 @@ import Setting from './Setting.astro';
   });
 
   $timerInput.on('change', () => {
-    const duration = Number($timerInput.filter(':checked').val());
+    let duration = Number($timerInput.filter(':checked').val());
     if (!isNaN(duration)) {
       updateTimerDisplay(duration);
     }
   });
+
+  $wordCountInput.on('change', () => {
+    let wordCount = Number($wordCountInput.filter(':checked').val());
+    if (!isNaN(wordCount)) {
+      updateWordCountDisplay(wordCount);
+    }
+  });
+
+  toggleModeVisibility(initialMode);
+  updateTimerDisplay(initialDuration);
 </script>

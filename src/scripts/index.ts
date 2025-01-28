@@ -1,18 +1,23 @@
 import TypeQuest from './TypeQuest';
 
+const $numInput = $('#numbers');
+const $puncInput = $('#punctuation');
 const $typingInput = $('#keyboard-input');
 const $textFieldContainer = $('.text-field');
-
-const language = 'english';
-const includeNumbers = $('#numbers').is(':checked');
-const includePunctuation = $('#punctuation').is(':checked');
-const wordCount = $('input[name="word-count"]').val() as number;
-const timerDuration = $('input[name="timer"]').val() as number;
-const typingMode = $('input[name="typing-mode"]:checked').val() as
-  | 'timer'
-  | 'wordCount';
+const $timerInput = $('input[name="timer"]');
+const $wordCountInput = $('input[name="word-count"]');
+const $typingModeInput = $('input[name="typing-mode"]');
 
 function init() {
+  const language = 'english';
+  const wordCount = $wordCountInput.val() as number;
+  const timerDuration = $timerInput.val() as number;
+  const includeNumbers = $numInput.is(':checked') as boolean;
+  const includePunctuation = $puncInput.is(':checked') as boolean;
+  const typingMode = $('input[name="typing-mode"]:checked').val() as
+    | 'timer'
+    | 'wordCount';
+
   const tq = new TypeQuest(
     language,
     wordCount,
@@ -24,5 +29,11 @@ function init() {
 
   tq.startGame($typingInput, $textFieldContainer);
 }
+
+[$numInput, $puncInput, $timerInput, $wordCountInput, $typingModeInput].forEach(
+  ($input) => {
+    $input.on('change', init);
+  },
+);
 
 init();
