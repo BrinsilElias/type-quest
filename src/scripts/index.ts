@@ -10,13 +10,14 @@ const $typingModeInput = $('input[name="typing-mode"]');
 
 function init() {
   const language = 'english';
-  const wordCount = $wordCountInput.val() as number;
-  const timerDuration = $timerInput.val() as number;
+  const wordCount = $wordCountInput.filter(':checked').val() as number;
+  const timerDuration = $timerInput.filter(':checked').val() as number;
   const includeNumbers = $numInput.is(':checked') as boolean;
   const includePunctuation = $puncInput.is(':checked') as boolean;
   const typingMode = $('input[name="typing-mode"]:checked').val() as
     | 'timer'
     | 'wordCount';
+  $typingInput.prop('disabled', false);
 
   const tq = new TypeQuest(
     language,

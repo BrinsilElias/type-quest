@@ -2,7 +2,7 @@
 
 /* TL;DR: Utility classes (yes, like Tailwind) */
 
-.flow > * + * {
+.flow>*+* {
   margin-block-start: var(--_flow-space, var(--space-m-l));
 }
 
@@ -50,6 +50,14 @@
 .text-center {
   text-align: center;
   margin-inline: auto;
+}
+
+.correct {
+  color: var(--clr-success);
+}
+
+.incorrect {
+  color: var(--clr-error);
 }
 
 /* === FOR DEBUGGING PURPOSES ONLY! === */
