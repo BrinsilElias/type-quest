@@ -10,6 +10,9 @@
   --clr-neutral-600: hsl(220, 8%, 64%);
   --clr-neutral-800: hsl(219, 13%, 32%);
 
+  --clr-success: hsl(160, 100%, 37%);
+  --clr-error: hsl(357, 96%, 58%);
+
   /* Fonts */
   --font-family-primary: 'Inter', sans-serif;
   --font-family-secondary: 'Plus Jakarta Sans', serif;

@@ -42,13 +42,34 @@ class TypeQuest {
     this.isTimerActive = false;
 
     this.startGame = this.startGame.bind(this);
+    this.addNumber = this.addNumber.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.fetchWordList = this.fetchWordList.bind(this);
     this.displayResults = this.displayResults.bind(this);
+    this.addPunctuation = this.addPunctuation.bind(this);
+  }
+
+  private addPunctuation(word: string) {
+    const punctuations = ['.', ',', '!', '?', ';', ':', '...'];
+    if (Math.random() < 0.2) {
+      const randomPunctuation =
+        punctuations[Math.floor(Math.random() * punctuations.length)];
+      return word + randomPunctuation;
+    }
+    return word;
+  }
+
+  private addNumber(word: string) {
+    if (Math.random() < 0.1) {
+      const randomNumber = Math.floor(Math.random() * 10);
+      word = randomNumber.toString();
+    }
+    return word;
   }
 
   async fetchWordList($container: JQuery<HTMLElement>) {
     try {
+      let randomWord: string;
       let randomWords: string[];
       const request = new Request('/random.json');
       const cacheName = 'word-list-cache';
@@ -73,7 +94,12 @@ class TypeQuest {
       $container.empty();
       while (this.generatedWords.length < this.wordCount) {
         const randomIndex = Math.floor(Math.random() * randomWords.length);
-        const randomWord = randomWords[randomIndex] || '';
+        randomWord = this.includePunctuation
+          ? this.addPunctuation(randomWords[randomIndex] || '')
+          : randomWords[randomIndex] || '';
+        randomWord = this.includeNumbers
+          ? this.addNumber(randomWord)
+          : randomWord;
         this.generatedWords.push(randomWord);
         const wordSpan = $('<span class="word"></span>');
         [...randomWord].forEach((letter) => {
@@ -148,6 +174,10 @@ class TypeQuest {
       ) {
         this.startTimer();
       }
+      const $currWord = $('span.word').eq(this.currentWordIndex);
+      const $currLetter = $currWord
+        .find('span.letter')
+        .eq(this.currentLetterIndex);
       if (
         event.key !== ' ' &&
         event.key !== 'Backspace' &&
@@ -157,7 +187,9 @@ class TypeQuest {
         const currentWord = this.generatedWords[this.currentWordIndex] || '';
         const currentLetter = currentWord[this.currentLetterIndex];
         if (typedKey === currentLetter) {
-          // add green highlight
+          $currLetter.addClass('correct');
+        } else {
+          $currLetter.addClass('incorrect');
         }
         this.caret.moveCaretPosition(
           this.currentWordIndex,
