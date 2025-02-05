@@ -7,6 +7,51 @@ import WordCount from '../assets/letter-text.svg';
 import Setting from './Setting.astro';
 ---
 
+<form class="cluster">
+  <fieldset class="text-config">
+    <legend class="sr-only">Punctuation and Numbers</legend>
+    <menu class="cluster">
+      <Setting id="punctuation" value="punctuation" type="checkbox">
+        <AtIcon />
+        Punctuation
+      </Setting>
+      <Setting id="numbers" value="numbers" type="checkbox">
+        <HashIcon />
+        Numbers
+      </Setting>
+    </menu>
+  </fieldset>
+  <fieldset class="mode-config">
+    <legend class="sr-only">Typing Mode</legend>
+    <menu class="cluster">
+      <Setting id="timer-mode" value="timer" type="radio" name="typing-mode" checked
+        ><Clock />Timer Mode</Setting
+      >
+      <Setting id="word-count-mode" value="wordCount" type="radio" name="typing-mode"
+        ><WordCount />Word Count Mode</Setting
+      >
+    </menu>
+  </fieldset>
+  <fieldset class="timer-config">
+    <legend class="sr-only">Timer</legend>
+    <menu class="cluster">
+      <Setting id="timer-15" value="15" type="radio" name="timer" checked>15</Setting>
+      <Setting id="timer-30" value="30" type="radio" name="timer">30</Setting>
+      <Setting id="timer-60" value="60" type="radio" name="timer">60</Setting>
+      <Setting id="timer-120" value="120" type="radio" name="timer">120</Setting>
+    </menu>
+  </fieldset>
+  <fieldset class="word-count-config">
+    <legend class="sr-only">Word Count</legend>
+    <menu class="cluster">
+      <Setting id="word-count-10" value="10" type="radio" name="word-count" checked>10</Setting>
+      <Setting id="word-count-25" value="25" type="radio" name="word-count">25</Setting>
+      <Setting id="word-count-50" value="50" type="radio" name="word-count">50</Setting>
+      <Setting id="word-count-100" value="100" type="radio" name="word-count">100</Setting>
+    </menu>
+  </fieldset>
+</form>
+
 <style>
   form {
     gap: var(--space-m);
@@ -38,73 +83,6 @@ import Setting from './Setting.astro';
   }
 </style>
 
-<form class="cluster">
-  <fieldset class="text-config">
-    <legend class="sr-only">Punctuation and Numbers</legend>
-    <menu class="cluster">
-      <Setting id="punctuation" value="punctuation" type="checkbox">
-        <AtIcon />
-        Punctuation
-      </Setting>
-      <Setting id="numbers" value="numbers" type="checkbox">
-        <HashIcon />
-        Numbers
-      </Setting>
-    </menu>
-  </fieldset>
-  <fieldset class="mode-config">
-    <legend class="sr-only">Typing Mode</legend>
-    <menu class="cluster">
-      <Setting
-        id="timer-mode"
-        value="timer"
-        type="radio"
-        name="typing-mode"
-        checked><Clock />Timer Mode</Setting
-      >
-      <Setting
-        id="word-count-mode"
-        value="wordCount"
-        type="radio"
-        name="typing-mode"><WordCount />Word Count Mode</Setting
-      >
-    </menu>
-  </fieldset>
-  <fieldset class="timer-config">
-    <legend class="sr-only">Timer</legend>
-    <menu class="cluster">
-      <Setting id="timer-15" value="15" type="radio" name="timer" checked
-        >15</Setting
-      >
-      <Setting id="timer-30" value="30" type="radio" name="timer">30</Setting>
-      <Setting id="timer-60" value="60" type="radio" name="timer">60</Setting>
-      <Setting id="timer-120" value="120" type="radio" name="timer">120</Setting
-      >
-    </menu>
-  </fieldset>
-  <fieldset class="word-count-config">
-    <legend class="sr-only">Word Count</legend>
-    <menu class="cluster">
-      <Setting
-        id="word-count-10"
-        value="10"
-        type="radio"
-        name="word-count"
-        checked>10</Setting
-      >
-      <Setting id="word-count-25" value="25" type="radio" name="word-count"
-        >25</Setting
-      >
-      <Setting id="word-count-50" value="50" type="radio" name="word-count"
-        >50</Setting
-      >
-      <Setting id="word-count-100" value="100" type="radio" name="word-count"
-        >100</Setting
-      >
-    </menu>
-  </fieldset>
-</form>
-
 <script>
   import { fmtTimeInterval } from '../scripts/utility.ts';
 
@@ -114,22 +92,18 @@ import Setting from './Setting.astro';
   const $typingModeInputs = $('input[name="typing-mode"]');
 
   const initialDuration = Number($timerInput.val());
-  const initialMode = $typingModeInputs.filter(':checked').val() as
-    | 'timer'
-    | 'wordCount';
+  const initialMode = $typingModeInputs.filter(':checked').val() as 'timer' | 'wordCount';
 
   const updateTimerDisplay = (duration: number) => {
     $typingMode.html(
       `<time\
         datetime="${fmtTimeInterval(duration, 'Xm Ys')}">\
-        ${fmtTimeInterval(duration)}</time>`,
+        ${fmtTimeInterval(duration)}</time>`
     );
   };
 
   const updateWordCountDisplay = (wordCount: number) => {
-    $typingMode.html(
-      `<span>0 / <span class="word-count">${wordCount}</span></span>`,
-    );
+    $typingMode.html(`<span>0 / <span class="word-count">${wordCount}</span></span>`);
   };
 
   const toggleModeVisibility = (mode: 'timer' | 'wordCount') => {
@@ -149,9 +123,7 @@ import Setting from './Setting.astro';
   };
 
   $typingModeInputs.on('change', () => {
-    const mode = $typingModeInputs.filter(':checked').val() as
-      | 'timer'
-      | 'wordCount';
+    const mode = $typingModeInputs.filter(':checked').val() as 'timer' | 'wordCount';
     toggleModeVisibility(mode);
   });
 

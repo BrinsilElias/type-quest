@@ -7,6 +7,11 @@ interface Props {
 const { key, label } = Astro.props;
 ---
 
+<div role="group" class="cluster" style="--_justify-content: center; --_gutter: 1rem;">
+  <kbd>{key}</kbd>
+  <p>{label}</p>
+</div>
+
 <style>
   kbd {
     --_clr-key-background: var(--clr-accent-light);
@@ -24,15 +29,6 @@ const { key, label } = Astro.props;
     font-weight: var(--font-weight-6);
   }
 </style>
-
-<div
-  role="group"
-  class="cluster"
-  style="--_justify-content: center; --_gutter: 1rem;"
->
-  <kbd>{key}</kbd>
-  <p>{label}</p>
-</div>
 
 <script>
   const userAgent = window.navigator.userAgent;

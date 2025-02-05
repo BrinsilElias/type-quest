@@ -10,6 +10,13 @@ interface Props {
 const { id, value, name, type, checked } = Astro.props;
 ---
 
+<li role="menuitem">
+  <label class="form-control">
+    <input id={id} type={type} name={name} value={value} checked={checked} />
+    <slot />
+  </label>
+</li>
+
 <style>
   .form-control {
     display: flex;
@@ -22,10 +29,7 @@ const { id, value, name, type, checked } = Astro.props;
       --fg-color: var(--accent-color);
     }
 
-    &:has(
-        input[type='radio']:focus-visible,
-        input[type='checkbox']:focus-visible
-      ) {
+    &:has(input[type='radio']:focus-visible, input[type='checkbox']:focus-visible) {
       outline: var(--outline-size) var(--accent-color) solid;
       outline-offset: var(--outline-offset);
     }
@@ -40,10 +44,3 @@ const { id, value, name, type, checked } = Astro.props;
     }
   }
 </style>
-
-<li role="menuitem">
-  <label class="form-control">
-    <input id={id} type={type} name={name} value={value} checked={checked} />
-    <slot />
-  </label>
-</li>

@@ -1,12 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
+// import ScoreCard from '../components/ScoreCard.astro';
 import InputField from '../components/InputField.astro';
 import TestSettings from '../components/TestSettings.astro';
 import ThemeSelector from '../components/ThemeSelector.astro';
 
 import Logo from '../assets/logo.svg';
 ---
+
+<Layout title="TypeQuest">
+  <ThemeSelector />
+  <header>
+    <Logo />
+    <h1>Type Quest</h1>
+  </header>
+  <main>
+    <section class="region flow wrapper" style="--_region-space: 2rem;">
+      <TestSettings />
+      <p class="typing-mode"><time datetime="0m 15s">00:15</time></p>
+      <section class="text-field cluster"></section>
+      <InputField />
+      <!-- <ScoreCard /> -->
+    </section>
+  </main>
+  <Footer />
+</Layout>
 
 <style>
   header {
@@ -54,23 +73,6 @@ import Logo from '../assets/logo.svg';
     }
   }
 </style>
-
-<Layout title="TypeQuest">
-  <ThemeSelector />
-  <header>
-    <Logo />
-    <h1>Type Quest</h1>
-  </header>
-  <main>
-    <section class="region flow wrapper" style="--_region-space: 2rem;">
-      <TestSettings />
-      <p class="typing-mode"><time datetime="0m 15s">00:15</time></p>
-      <section class="text-field cluster"></section>
-      <InputField />
-    </section>
-  </main>
-  <Footer />
-</Layout>
 
 <script>
   const themeSelector = document.querySelector('dialog');
