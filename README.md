@@ -1,37 +1,29 @@
-![]('/../public/images/og-image.png)
+![]('/../public/images/Banner.jpg)
 
-# [ASTRO-CUBE](https://astro-cube.vercel.app) 🧊
+# TypeQuest 🚅
 
-a tiny, almost-unopinionated [Astro](https://astro.build/) starter for your next blog, documentation, personal/marketing website, and more.
+A simple website that puts your typing speed to test.
 
-it comes with the [CUBE CSS](https://cube.fyi/) file structure, a methodology for managing stylesheets efficiently no matter the size of the project.
+## 🚀 features
 
-the project is mostly barebones, the goal isn't to provide a batteries-included template, just an easy starter kit and stylesheets to copy/paste from.
+- minimalistic design
+- live errors, wpm, and accuracy displays
+- a variety of test lengths and languages
+- punctuation and numbers modes
+- themes
 
-most styles are for demo purposes and to explain the underlying philosophy: "Be the browser's mentor, not its micromanager" (see [buildexcellentwebsit.es](https://buildexcellentwebsit.es)).
-
-## features
-
-- **[CUBE CSS](https://cube.fyi/) implementation**: take a look at the docs, they are concise and explain way better than i would
-- **fluid and responsive**: it looks great no matter the device size
-  - [Every Layout](https://every-layout.dev/) examples for layout elements
-  - [Utopia](https://utopia.fyi/) for fluid `clamp()`-based font sizes and spacing
-- **lightweight**: 💯 [lighthouse score](https://developer.chrome.com/en/docs/lighthouse/performance/performance-scoring/) across the board — not surprising considering the size of the project, but worth mentioning
-- **dark-mode ready**: implement your own theme switcher if you're into that sort of thing, all you have to do is toggle the `data-theme` attribute on the body
-- **SEO** ready: basic SEO meta-tags are set-up, with `sitemap`s automatically generated at build time
-
-## installation
+## 📦 Want to contribute?
 
 ### clone this repo
 
 ```bash
-git clone https://github.com/williamhzo/astro-cube.git
+git clone https://github.com/BrinsilElias/type-quest
 ```
 
 ### instal dependencies
 
 ```bash
-cd astro-cube
+cd type-quest
 ```
 
 ```bash
@@ -56,41 +48,16 @@ npm run build
 npm run preview
 ```
 
-### ...or use the template directly ➡️ "Use this template" > "Create a new repository"
-
-## contributions are welcome! 👋
-
-it's great if this kit can be helpful to some folks out there, i'm open to feedback and greatly appreciate contributions, feel free to chip in for fixes, suggestions, or features! let me know if you have improvement ideas.
-
 ---
 
-## credits
+## 🎊 credits
 
-greater minds than mine are behind the choices in this kit, i'd like to mention them for the inspiration and learning provided:
+greater minds than mine are behind the inspiration for building this site, I'd like to mention those projects
 
-### **[Astro core & docs team](https://docs.astro.build/en/getting-started/)**
+- [monkeytype.com](https://monkeytype.com)
+- [typings.gg](https://typings.gg)
+- [typetest.io](https://typetest.io)
 
-along with contributors, for a great onboarding experience and a wholesome community.
+I hope you find this tool useful! 🌟
 
-### **[Andy Bell](https://andy-bell.co.uk/)**
-
-Andy is a great source of inspiration for building robust UI working with the browser, rather than against it. but also for reminding me that CSS is an extremely powerful tool as it is. CUBE CSS really clicked to me as it brought pure "traditional" CSS to the component-first world of today.
-
-- [Every Layout](https://every-layout.dev/)
-- [CUBE CSS](https://cube.fyi/)
-
-### **[Heydon Pickering](https://heydonworks.com/)**
-
-Heydon provides amazing insights and spicy takes on how to build for the web, from an inclusive and accessible perspective.
-
-- [Inclusive Components](https://inclusive-components.design/)
-- [Webbed Briefs](https://briefs.video/)
-- [Every Layout](https://every-layout.dev/)
-
-### **[Lene Saile](https://www.lenesaile.com/en/)**
-
-Lene made an amazing [Eleventy](https://www.11ty.dev/) starter based on CUBE CSS which is way more mature and complete than this one. it comes batteries included to build a full-blown blog with 11y in a breeze, i'd definitely recommend checking it out.
-
-her starter greatly inspired me to build one for Astro (it will be a separate one from this minimal one).
-
-- [Eleventy Excellent](https://github.com/madrilene/eleventy-excellent)
+Made with ❤️ by [Brinsil](https://www.github.com/BrinsilElias).
