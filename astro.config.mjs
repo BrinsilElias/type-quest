@@ -8,4 +8,6 @@ export default defineConfig({
   experimental: {
     svg: true,
   },
+  printWidth: 100,
+  singleQuote: true,
 });

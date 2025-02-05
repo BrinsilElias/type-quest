@@ -2,7 +2,7 @@
 
 /* TL;DR: Utility classes (yes, like Tailwind) */
 
-.flow>*+* {
+.flow > * + * {
   margin-block-start: var(--_flow-space, var(--space-m-l));
 }
 
