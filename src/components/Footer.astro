@@ -10,6 +10,25 @@ const packageJson = fs.readFileSync('package.json', 'utf8');
 const { version } = JSON.parse(packageJson);
 ---
 
+<footer>
+  <section class="cluster" style="--_justify-content: center;
+    --_gutter: 1rem">
+    <Shortcuts key="Ctrl + T" label="Change Theme" />
+    <Shortcuts key="Ctrl + R" label="Restart Test" />
+  </section>
+  <ul class="cluster" style="--_justify-content: center; --_gutter: 2rem">
+    <li>
+      <a href="https://github.com/BrinsilElias/type-quest"><Github />Github</a>
+    </li>
+    <li>
+      <button class="theme-switch"><Palette />Light Theme</button>
+    </li>
+    <li>
+      <span><Version />v{version}</span>
+    </li>
+  </ul>
+</footer>
+
 <style>
   a,
   button.theme-switch,
@@ -35,25 +54,3 @@ const { version } = JSON.parse(packageJson);
     }
   }
 </style>
-
-<footer>
-  <section
-    class="cluster"
-    style="--_justify-content: center;
-    --_gutter: 1rem"
-  >
-    <Shortcuts key="Ctrl + T" label="Change Theme" />
-    <Shortcuts key="Ctrl + R" label="Restart Test" />
-  </section>
-  <ul class="cluster" style="--_justify-content: center; --_gutter: 2rem">
-    <li>
-      <a href="https://github.com/BrinsilElias/type-quest"><Github />Github</a>
-    </li>
-    <li>
-      <button class="theme-switch"><Palette />Light Theme</button>
-    </li>
-    <li>
-      <span><Version />v{version}</span>
-    </li>
-  </ul>
-</footer>

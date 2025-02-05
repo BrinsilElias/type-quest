@@ -2,6 +2,11 @@
 import Refresh from '../assets/refresh-cw.svg';
 ---
 
+<div role="group" class="input-field-control" aria-label="Input Field">
+  <input type="text" id="keyboard-input" autocomplete="off" />
+  <button type="button">Redo<Refresh /></button>
+</div>
+
 <style>
   .input-field-control {
     --_clr-input-background: var(--clr-neutral-100);
@@ -50,8 +55,3 @@ import Refresh from '../assets/refresh-cw.svg';
     }
   }
 </style>
-
-<div role="group" class="input-field-control" aria-label="Input Field">
-  <input type="text" id="keyboard-input" autocomplete="off" />
-  <button type="button">Redo<Refresh /></button>
-</div>
