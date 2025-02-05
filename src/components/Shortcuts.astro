@@ -7,7 +7,11 @@ interface Props {
 const { key, label } = Astro.props;
 ---
 
-<div role="group" class="cluster" style="--_justify-content: center; --_gutter: 1rem;">
+<div
+  role="group"
+  class="cluster"
+  style="--_justify-content: center; --_gutter: 1rem;"
+>
   <kbd>{key}</kbd>
   <p>{label}</p>
 </div>
