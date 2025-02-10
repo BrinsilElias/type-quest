@@ -1,4 +1,4 @@
-![]('/../public/images/Banner.jpg)
+![]('/../public/images/Banner.png)
 
 # TypeQuest 🚅
 
