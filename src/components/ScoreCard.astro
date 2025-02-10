@@ -1,0 +1,107 @@
+---
+import NextIcon from '../assets/next.svg';
+import Refresh from '../assets/refresh-cw.svg';
+---
+
+<article class="score-card">
+  <div class="header cluster" style="--_justify-content: space-between">
+    <p>TypeQuest Score</p>
+    <span>Moderate</span>
+  </div>
+  <div class="wpm-result">
+    <span role="progressbar">
+      <svg width="200" height="100" viewBox="-100 -50 200 100">
+        <path
+          d="M -90 50 A 0 0 0 0 1 -40 -50"
+          stroke="red"
+          stroke-width="20"
+          fill="none"></path>
+      </svg>
+    </span>
+    <div class="result-grid">
+      <p>Accuracy - <span id="accuracy">88%</span></p>
+      <p>Characters - <span id="characters">160</span></p>
+      <p>Time - <span id="time">30s</span></p>
+      <p>Incorrect - <span id="incorrect">14</span></p>
+    </div>
+  </div>
+  <div class="action-group">
+    <button type="button">Next<NextIcon /></button>
+    <button type="button">Redo<Refresh /></button>
+  </div>
+</article>
+
+<style>
+  p {
+    font-size: clamp(0.75rem, 0.6964rem + 0.2679vw, 0.9375rem);
+    font-weight: var(--font-weight-5);
+  }
+  .header {
+    span {
+      font-weight: var(--font-weight-5);
+      padding: 6px;
+      background-color: #edecfa;
+      color: var(--clr-accent-light);
+      border-radius: var(--border-radius-sm);
+    }
+  }
+  span[role='progressbar'] {
+    --_size: 200px;
+    --_bar-width: 20px;
+
+    position: relative;
+    width: var(--_size);
+    height: calc(var(--_size) / 2);
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    border-radius: 100vmax 100vmax 0 0;
+    background-color: var(--clr-gray-light);
+    margin-block-end: var(--space-l);
+    margin-inline: auto;
+
+    &::before {
+      content: '';
+      display: block;
+      background-color: var(--clr-neutral-100);
+      width: calc(100% - (var(--_bar-width) * 2));
+      height: calc(100% - var(--_bar-width));
+      border-radius: inherit;
+    }
+
+    svg {
+      position: absolute;
+      outline: 1px solid gray;
+    }
+  }
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: var(--space-s) 0;
+
+    & > *:nth-child(2),
+    & > *:nth-child(4) {
+      justify-self: end;
+    }
+  }
+  .action-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xs);
+
+    button {
+      align-items: center;
+      justify-content: center;
+
+      &:first-child {
+        --_clr-button-background: var(--clr-accent-light);
+        --_clr-button-text: var(--clr-neutral-100);
+      }
+
+      &:last-child {
+        border: 1px solid var(--clr-border-dark);
+      }
+    }
+  }
+</style>
